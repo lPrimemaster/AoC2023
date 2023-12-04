@@ -15,15 +15,11 @@ void part1_2(const std::vector<std::string>& input)
         auto it = line.begin();
         while(it != line.end())
         {
-            // std::cout << *it << std::endl;
             if(std::isdigit(*it))
             {
                 auto start = it++;
                 int span = 2;
-                while(it != line.end() && std::isdigit(*it++))
-                {
-                    span++;
-                }
+                while(it != line.end() && std::isdigit(*it++)) span++;
                 numbers.push_back(std::make_tuple(
                     std::atoi(std::string(start, it).c_str()),
                     span,
@@ -62,7 +58,7 @@ void part1_2(const std::vector<std::string>& input)
                 [&which](const auto& c) { which++; return c == '*'; }
             ))
             {
-                if(loc.first == 0) which++;
+                if(loc.first == 0) which++; // Increment +1 for line-start numbers
                 size_t loc_gear = loc.first - 1 + which + (loc.second + i) * input[0].size();
                 if(possible_gears.count(loc_gear))
                 {
@@ -94,6 +90,7 @@ void part1_2(const std::vector<std::string>& input)
 
 int main()
 {
+    ScopedTimer _;
     auto input = ReadInputTo<std::vector<std::string>>();
     part1_2(input);
     return 0;

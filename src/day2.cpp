@@ -72,6 +72,7 @@ void part1_2(const std::string& input)
 
 int main()
 {
+    ScopedTimer _;
     const auto input = ReadInputTo<std::string>();
     part1_2(input);
     return 0;

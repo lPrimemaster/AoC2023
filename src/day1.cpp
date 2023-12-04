@@ -96,6 +96,7 @@ void part2(const std::string& input)
 
 int main()
 {
+    ScopedTimer _;
     const std::string input = ReadInputTo<std::string>();
     part1(input);
     part2(input);
