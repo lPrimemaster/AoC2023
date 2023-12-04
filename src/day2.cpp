@@ -9,6 +9,7 @@ namespace rv = std::ranges::views;
 
 void part1_2(const std::string& input)
 {
+    PPROF;
     int game_id_sum = 0;
     long long color_power = 0;
     int id = 0;
@@ -72,7 +73,7 @@ void part1_2(const std::string& input)
 
 int main()
 {
-    ScopedTimer _;
+    PPROF;
     const auto input = ReadInputTo<std::string>();
     part1_2(input);
     return 0;

@@ -7,6 +7,7 @@
 
 void part1_2(const std::vector<std::string>& input)
 {
+    PPROF;
     using NumberInfo = std::tuple<int, int, std::pair<size_t, size_t>>;
     std::vector<NumberInfo> numbers; // value, span, location (x, y)
     for(size_t i = 0; i < input.size(); i++) // views::enumerate not in gcc 12 =(
@@ -90,7 +91,7 @@ void part1_2(const std::vector<std::string>& input)
 
 int main()
 {
-    ScopedTimer _;
+    PPROF;
     auto input = ReadInputTo<std::vector<std::string>>();
     part1_2(input);
     return 0;

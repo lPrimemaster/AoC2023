@@ -23,6 +23,7 @@ static std::map<std::string_view, int> str_int_map = {
 
 void part1(const std::string& input)
 {
+    PPROF;
     auto instructions = input
         | rv::split('\n')
         | rv::transform([](auto&& s) -> int { 
@@ -41,6 +42,7 @@ void part1(const std::string& input)
 
 void part2(const std::string& input)
 {
+    PPROF;
     auto instructions = input
         | rv::split('\n')
         | rv::transform([](auto&& s) -> int {
@@ -96,7 +98,7 @@ void part2(const std::string& input)
 
 int main()
 {
-    ScopedTimer _;
+    PPROF;
     const std::string input = ReadInputTo<std::string>();
     part1(input);
     part2(input);
