@@ -67,21 +67,24 @@ void part2(const std::vector<std::string>& input)
         }
         win_count_map[id++] = nmatch;
     }
-
-    std::queue<int> cards;
-    for(size_t i = 0; i < win_count_map.size(); i++)
-        cards.push(static_cast<int>(i));
     
-    // One could discard duplicated iterations and multiply in the end
-    long long ncards = 0;
-    while(!cards.empty())
     {
-        int id = cards.front();
-        for(int i = 0; i < win_count_map[id]; i++) cards.push(id + 1 + i);
-        ncards += 1;
-        cards.pop();
+        PPROF_NAMED("iteration");
+        std::queue<int> cards;
+        for(size_t i = 0; i < win_count_map.size(); i++)
+            cards.push(static_cast<int>(i));
+        
+        // One could discard duplicated iterations and multiply in the end
+        long long ncards = 0;
+        while(!cards.empty())
+        {
+            int id = cards.front();
+            for(int i = 0; i < win_count_map[id]; i++) cards.push(id + 1 + i);
+            ncards += 1;
+            cards.pop();
+        }
+        std::cout << ncards << std::endl;
     }
-    std::cout << ncards << std::endl;
 }
 
 

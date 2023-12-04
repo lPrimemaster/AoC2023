@@ -18,6 +18,6 @@ foreach(file ${SRC_FILES})
     message(STATUS ${filename})
     string(REGEX MATCH "day([0-9]+)\\.cpp" _ ${filename})
     add_executable("day${CMAKE_MATCH_1}" ${file})
-    target_compile_options("day${CMAKE_MATCH_1}" PUBLIC -Wall -pedantic -O2)
+    target_compile_options("day${CMAKE_MATCH_1}" PUBLIC -Wall -pedantic -Ofast)
 endforeach()
 
