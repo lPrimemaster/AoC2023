@@ -6,6 +6,7 @@
 #include <memory>
 #include <ranges>
 #include <string_view>
+#include <iomanip>
 #include <chrono>
 
 template<typename T>
@@ -55,14 +56,18 @@ private:
     struct Node
     {
         float millis;
+        float micros;
         std::string name;
         int indent;
         std::vector<Node> children;
+        bool use_micros;
 
         inline void print() const
         {
             for(int i = 0; i < indent; i++) std::cout << '\t';
-            std::cout << "-> [" << name << "] Execution time : " << millis << "ms." << std::endl;
+            std::cout << "-> [" << name << "] Execution time : " << 
+                    (use_micros ? micros : millis) << 
+                    (use_micros ? "us." : "ms.") << std::endl;
         }
     };
 
@@ -72,7 +77,9 @@ public:
         auto ms_d = std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - _tp
         );
+        _scope_stack.top()->use_micros = ms_d.count() < 1000;
         _scope_stack.top()->millis = ms_d.count() / 1000.0f;
+        _scope_stack.top()->micros = ms_d.count() / 1.0f;
         _scope_stack.top()->name   = scope_name;
         _scope_stack.top()->indent = _scope_stack.size() - 1;
         _scope_stack.pop();
