@@ -12,12 +12,17 @@ file(GLOB SRC_FILES src/*.cpp)
 
 set(CMAKE_CXX_STANDARD 23)
 
+set(day_list "") 
+
 foreach(file ${SRC_FILES})
     string(REPLACE "/" ";" file_sep ${file})
     list(GET file_sep -1 filename)
     message(STATUS ${filename})
     string(REGEX MATCH "day([0-9]+)\\.cpp" _ ${filename})
     add_executable("day${CMAKE_MATCH_1}" ${file})
+    list(APPEND day_list ${CMAKE_MATCH_1})
     target_compile_options("day${CMAKE_MATCH_1}" PUBLIC -Wall -pedantic -Ofast)
 endforeach()
 
+string(REPLACE ";" " " day_list "${day_list}")
+configure_file(run.sh run.sh @ONLY)
