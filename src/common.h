@@ -48,6 +48,13 @@ const std::string_view RangeToStringView(const T& range)
     return std::string_view(&*range.begin(), std::ranges::distance(range));
 }
 
+template<std::ranges::range R>
+const auto RangeToVector(R&& r)
+{
+    using elem_t = std::decay_t<std::ranges::range_value_t<R>>;
+    return std::vector<elem_t>{r.begin(), r.end()};
+}
+
 // RAII Timer
 class ScopedTimer
 {
