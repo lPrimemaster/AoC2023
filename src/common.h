@@ -8,6 +8,7 @@
 #include <string_view>
 #include <iomanip>
 #include <chrono>
+#include <algorithm>
 
 template<typename T>
 concept ReadableFmt = requires(T r)
@@ -34,6 +35,11 @@ static inline R ReadInputTo()
     {
         return vec;
     }
+}
+
+bool IsNumber(const std::string& str)
+{
+    return std::all_of(str.begin(), str.end(), ::isdigit);
 }
 
 template<typename T>
