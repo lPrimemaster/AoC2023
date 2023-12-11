@@ -22,7 +22,7 @@ std::vector<Sequence> parse(const std::vector<std::string>& input)
     return out;
 }
 
-void part1(const std::vector<std::string>& input)
+void part1_2(const std::vector<std::string>& input)
 {
     PPROF;
     auto data = parse(input);
@@ -44,6 +44,7 @@ void part1(const std::vector<std::string>& input)
         std::int32_t prediction_1 = std::accumulate(chain_1.begin(), chain_1.end(), static_cast<std::int32_t>(0));
         sum_1 += prediction_1;
         
+        // Part2
         std::reverse(chain_2.begin(), chain_2.end());
         std::int32_t prediction_2 = std::accumulate(chain_2.begin(), chain_2.end(), static_cast<std::int32_t>(0), [](std::int32_t v, std::int32_t x) {
             return x - v;
@@ -58,6 +59,6 @@ int main()
 {
     PPROF;
     const auto input = ReadInputTo<std::vector<std::string>>();
-    part1(input);
+    part1_2(input);
     return 0;
 }
